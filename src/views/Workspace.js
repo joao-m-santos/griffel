@@ -46,6 +46,7 @@ function Workspace(props) {
   useEffect(() => {
     dispatch({ type: SELECT_WORKSPACE, payload: id });
     dispatch({ type: TRAININGS_FETCH_REQUESTED, payload: id });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

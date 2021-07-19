@@ -49,6 +49,7 @@ function Intro(props) {
   // Lifecycle
   useEffect(() => {
     dispatch({ type: WORKSPACE_DESELECTED });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
