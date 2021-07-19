@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function App() {
+import { makeStyles } from "@material-ui/core/styles";
+import { Container, LinearProgress } from "@material-ui/core";
+
+import Navbar from "./components/Navbar";
+import Intro from "./views/Intro";
+import Workspace from "./views/Workspace";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    paddingTop: theme.spacing(4)
+  }
+}));
+
+function App(props) {
+  const classes = useStyles();
+
+  const isLoading = useSelector((state) => state.app.loading);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar></Navbar>
+      {isLoading && <LinearProgress />}
+
+      <Container className={classes.container}>
+        <Switch>
+          <Route path="/workspace/:id">
+            <Workspace></Workspace>
+          </Route>
+          <Route path="/">
+            <Intro></Intro>
+          </Route>
+        </Switch>
+      </Container>
+    </>
   );
 }
 
